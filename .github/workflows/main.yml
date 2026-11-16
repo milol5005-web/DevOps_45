@@ -1,0 +1,28 @@
+
+name: DevOps_45
+
+# Запуск после отправки изменений в main
+on:
+  push:  #  запуск после отправки изменений
+    branches:
+      - main  #  запуск только для ветки main
+
+jobs:
+  check-files:
+    runs-on: ubuntu-latest  #  виртуальный компьютер Ubuntu
+
+    steps:
+      - name: Download project #  Название процесса
+        uses: actions/checkout@v4  #  загружает файлы проекта
+
+      - name: Check index.html
+        run: test -f index.html  #  проверяет существование файла
+
+      - name: Check style.css
+        run: test -f style.css
+
+      - name: Check script.js
+        run: test -f script.js
+
+      - name: Success message
+        run: echo "All files exist!"  #  выводит сообщение об успешной проверке
